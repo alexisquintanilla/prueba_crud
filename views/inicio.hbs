@@ -1,0 +1,63 @@
+<h1 class="text-center py-4">Ejercicio de CRUD</h1>
+
+<div class="row py-3">
+    <div class="col-12 col-lg-3">
+        <h4>Crear un Archivo</h4>
+        <form method="post" action="/">
+            {{#if success}}
+            <script>
+                alert('Archivo Generado Exitosamente')</script>
+
+            {{/if}}
+
+            <div class="mb-3">
+                <label for="nombreArchivo" class="form-label">Nombre del Archivo</label>
+                <input type="text" class="form-control" name="nombreArchivo" required>
+            </div>
+            <div class="mb-3">
+                <label for="contenidoArchivo" class="form-label">Contenido</label>
+                <textarea class="form-control" name="contenidoArchivo" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear</button>
+
+        </form>
+
+    </div>
+
+    <div class="col-12 col-lg-3">
+        <h4>Leer un Archivo</h4>
+        <form action="/leer">
+            <div class="mb-3">
+                <label for="leerArchivo" class="form-label">Nombre del Archivo</label>
+                <input type="text" class="form-control" name="leerArchivo" required>
+            </div>
+            <button type="submit" class="btn btn-success">Consultar Archivo</button>
+        </form>
+    </div>
+
+    <div class="col-12 col-lg-3">
+        <h4>Reenombrar un archivo</h4>
+        <form action="submit">
+            <div class="mb-3">
+                <label for="nombreArchivo" class="form-label">Nombre del Archivo</label>
+                <input type="text" class="form-control" name="nombreArchivo" required>
+            </div>
+            <div class="mb-3">
+                <label for="newNombreArchivo" class="form-label">Nuevo Nombre del archivo</label>
+                <input type="text" class="form-control" name="newNombreArchivo" required>
+            </div>
+            <button type="submit" class="btn btn-warning">Renombrar archivo</button>
+        </form>
+    </div>
+
+    <div class="col-12 col-lg-3">
+        <h4>Eliminar Archivo</h4>
+        <form action="submit">
+            <div class="mb-3">
+                <label for="eliminarArchivo" class="form-label">Nombre del Archivo</label>
+                <input type="text" class="form-control" name="eliminarArchivo" required>
+            </div>
+            <button type="submit" class="btn btn-danger">Eliminar archivo</button>
+        </form>
+    </div>
+</div>
