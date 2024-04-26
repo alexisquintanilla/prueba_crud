@@ -22,7 +22,7 @@ app.set('views', __dirname + '/views');
 app.use('/', router)
 
 
-const PORT = 3001
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
     console.log(`Servidor trabajando en PORT ${PORT}`)
 })

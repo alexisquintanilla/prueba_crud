@@ -1,5 +1,5 @@
 import path from "path"
-import { readFile, writeFile } from 'fs/promises'
+import { readFile, writeFile, unlink, rename } from 'fs/promises'
 
 const __dirname = import.meta.dirname
 const pathFile = path.join(__dirname, '../data/')
@@ -15,18 +15,8 @@ const crearArchivo = async (req, res) => {
     const filePath = path.join(pathFile, `${nombreArchivo}.json`)
 
     try {
-
         await writeFile(filePath, contenidoArchivo);
-        const lectura = await readFile(filePath, 'utf-8')
-
-        console.log(lectura)
-        if (lectura) {
-            return res.render('inicio', { success: true });
-        } else {
-            return res.render('inicio', { success: false, error: 'Error al crear el archivo' });
-        }
-
-
+        return res.render('inicio', { success: true });
     } catch (err) {
 
         console.error('Error al escribir el archivo:', err);
@@ -34,19 +24,59 @@ const crearArchivo = async (req, res) => {
     }
 }
 
-const leer = (req, res) => {
+const leer = async (req, res) => {
+    const leerArchivo = req.query.leerArchivo;
+    console.log(leerArchivo)
+    const filePath = path.join(pathFile, `${leerArchivo}.json`)
+    console.log(filePath)
     try {
-        const leerArchivo = req.body.leerArchivo
-        res.json(leerArchivo)
+        const lectura = await readFile(filePath, 'utf-8')
+        console.log(lectura)
+        return res.json({ lectura })
     } catch (error) {
-        console.error('Error al leer:', err);
-        res.render('inicio');
+        console.error('Error al leer:', error);
+        res.render('errorLeer', { lectura: false });
     }
+}
 
+const renombrar = async (req, res) => {
+    const nombreArchivo = req.query.nombreArchivo
+    const newNombreArchivo = req.query.newNombreArchivo
+    const filePath = path.join(pathFile, `${nombreArchivo}.json`)
+    const newFilePath = path.join(pathFile, `${newNombreArchivo}.json`)
+
+
+    console.log(filePath)
+    console.log(newFilePath)
+    try {
+        await rename(filePath, newFilePath)
+        res.render('renombrar', { nombreArchivo, newNombreArchivo });
+    } catch (error) {
+        console.error('Error al leer:', error);
+        res.render('errorLeer');
+    }
+}
+
+
+const eliminarArchivo = async (req, res) => {
+    const eliminarArchivo = req.query.eliminarArchivo;
+    console.log(eliminarArchivo)
+    const filePath = path.join(pathFile, `${eliminarArchivo}.json`)
+    console.log(filePath)
+    try {
+        const lectura = await unlink(filePath)
+        return res.render('eliminar')
+
+    } catch (error) {
+        console.error('Error al leer:', error);
+        res.render('errorLeer');
+    }
 }
 
 export const crudController = {
     get,
     crearArchivo,
-    leer
+    leer,
+    eliminarArchivo,
+    renombrar
 }

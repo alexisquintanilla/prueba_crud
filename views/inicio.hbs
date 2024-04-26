@@ -26,7 +26,7 @@
 
     <div class="col-12 col-lg-3">
         <h4>Leer un Archivo</h4>
-        <form action="/leer">
+        <form method="get" action="/leer">
             <div class="mb-3">
                 <label for="leerArchivo" class="form-label">Nombre del Archivo</label>
                 <input type="text" class="form-control" name="leerArchivo" required>
@@ -37,7 +37,7 @@
 
     <div class="col-12 col-lg-3">
         <h4>Reenombrar un archivo</h4>
-        <form action="submit">
+        <form action="/renombrar">
             <div class="mb-3">
                 <label for="nombreArchivo" class="form-label">Nombre del Archivo</label>
                 <input type="text" class="form-control" name="nombreArchivo" required>
@@ -52,7 +52,7 @@
 
     <div class="col-12 col-lg-3">
         <h4>Eliminar Archivo</h4>
-        <form action="submit">
+        <form method="get" action="/eliminar">
             <div class="mb-3">
                 <label for="eliminarArchivo" class="form-label">Nombre del Archivo</label>
                 <input type="text" class="form-control" name="eliminarArchivo" required>
